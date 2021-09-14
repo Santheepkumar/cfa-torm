@@ -1,0 +1,21 @@
+image: node:latest
+
+stages:
+  - test
+  - production
+  
+test:
+  type: test
+  stage: testing
+  image: node:latest
+  script:
+    - node -v
+
+production:
+  type: deploy
+  stage: production
+  image: ubuntu:latest
+  script:
+    - bash ./build.sh
+  only:
+    - master
