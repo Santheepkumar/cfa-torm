@@ -1,3 +1,4 @@
+# test
 image: node:latest
 
 stages:
