@@ -22,6 +22,7 @@ test:
   image: node:latest
   script:
     - node -v
+    - npm run test
 
 production:
   type: deploy
