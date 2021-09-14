@@ -1,13 +1,19 @@
+image: node:latest
+
 stages:
-  - build
-  - build2
-docker-build:
-  image: docker:latest
-  stage: build
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  - test
+  - production
+  
+test:
+  type: test
+  stage: test
+  image: node:latest
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
-    - docker push "$CI_REGISTRY_IMAGE"
+    - node -v
+
+production:
+  type: deploy
+  stage: production
+  image: ubuntu:latest
+  script:
+    - bash ./build.sh
